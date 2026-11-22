@@ -1,0 +1,1 @@
+import{nt as e}from"./fake-util-D5BuUhdo.js";import{O as t,_t as n}from"./format-DlvkX0pm.js";var r=e(n(),1),i=Object.defineProperty,a=(e,t)=>i(e,`name`,{value:t,configurable:!0}),o=r.useId||(()=>void 0),s=0;function c(e){let[n,i]=r.useState(o());return t(()=>{e||i(e=>e??String(s++))},[e]),e||(n?`radix-${n}`:``)}a(c,`useId`);export{c as t};
