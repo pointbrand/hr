@@ -6,9 +6,13 @@ self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
 self.addEventListener('push', (event) => {
   let data = {};
   try { data = event.data ? event.data.json() : {}; } catch { data = { title: event.data?.text() }; }
-  event.waitUntil(self.registration.showNotification(data.title || 'HR', {
-    body: data.body || '', tag: data.tag, icon: '/icon-192.png', badge: '/icon-192.png', data: { url: data.url || '/' },
-  }));
+  const shown = self.registration.showNotification(data.title || 'HR', {
+    body: data.body || '', tag: data.tag, icon: '/icon-192.png', badge: '/icon-192.png', data: { url: data.url || '/' }, silent: false,
+  });
+  // the red number on the app icon = unread notifications (iPhone Home Screen app, Android, desktop)
+  const badge = typeof data.badge === 'number' && self.navigator.setAppBadge
+    ? (data.badge > 0 ? self.navigator.setAppBadge(data.badge) : self.navigator.clearAppBadge()).catch(() => {}) : Promise.resolve();
+  event.waitUntil(Promise.all([shown, badge]));
 });
 
 self.addEventListener('notificationclick', (event) => {
