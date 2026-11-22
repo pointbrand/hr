@@ -1,0 +1,1 @@
+import{a as e}from"./rolldown-runtime-BWaJ3C7D.js";import{h as t,it as n}from"./Display-F6qFSZ-F.js";var r=e(n(),1),i=Object.defineProperty,a=(e,t)=>i(e,`name`,{value:t,configurable:!0}),o=r.useId||(()=>void 0),s=0;function c(e){let[n,i]=r.useState(o());return t(()=>{e||i(e=>e??String(s++))},[e]),e||(n?`radix-${n}`:``)}a(c,`useId`);export{c as t};
