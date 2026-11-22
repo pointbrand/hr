@@ -6,7 +6,7 @@ self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
 self.addEventListener('push', (event) => {
   let data = {};
   try { data = event.data ? event.data.json() : {}; } catch { data = { title: event.data?.text() }; }
-  const shown = self.registration.showNotification(data.title || 'HR', {
+  const shown = self.registration.showNotification(data.title || 'Point Brand', {
     body: data.body || '', tag: data.tag, icon: '/icon-192.png', badge: '/icon-192.png', data: { url: data.url || '/' }, silent: false,
   });
   // the red number on the app icon = unread notifications (iPhone Home Screen app, Android, desktop)
