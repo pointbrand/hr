@@ -1,0 +1,1 @@
+import"./fake-Lz8YJ4LY.js";import"./shifts-DsdnmCBP.js";import"./people-NgGu_t42.js";import"./work-BX1wtr0x.js";import"./time-B6ePn3p7.js";import{b as e}from"./rules-BiDOq2RT.js";var t=e;export{t};

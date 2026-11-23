@@ -1,0 +1,26 @@
+# Uptime check for https://hr.pointbrand.com.sa — every 10 minutes from GitHub's servers (outside
+# Neon). /api/health answers 200 only when the app page, the database and sign-in all respond.
+# A cold start can take a few seconds, so it tries 3 times before failing. A failed run makes
+# GitHub email the account owner (Settings → Notifications → Actions on github.com).
+name: Uptime
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Check hr.pointbrand.com.sa
+        run: |
+          for attempt in 1 2 3; do
+            code=$(curl -s -o body.json -w '%{http_code}' --max-time 25 https://hr.pointbrand.com.sa/api/health || echo 000)
+            echo "attempt $attempt: HTTP $code $(cat body.json 2>/dev/null)"
+            [ "$code" = "200" ] && exit 0
+            sleep 30
+          done
+          echo "::error::hr.pointbrand.com.sa is not healthy"
+          exit 1
